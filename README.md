@@ -19,7 +19,7 @@ type PackageDir = {
 }
 
 getDir(
-  getParentDir: (relative: string) => string,
+  getParentDir: (relative: string) => string | { path: string },
   name: string,
   relative: string = ""
 ) => PackageDir

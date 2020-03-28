@@ -9,8 +9,10 @@ export type PackageDir = {
 export function getBase() {
   if(process.env.PWD === undefined) {
     throw Error("process.env.PWD is not set");
+  } else if(typeof process.env.PWD !== "string") {
+    throw Error("process.env.PWD is invalid");
   } else {
-    return process.env.PWD;
+    return process.env.PWD as string;
   }
 }
 
@@ -19,9 +21,13 @@ export function getRelative(path: string) {
   return relative(base, path);
 }
 
-export function getDir(getParentDir: (relative: string) => string, name: string, relative: string = ""): PackageDir {
+export function getDir(
+  getParentDir: (relative: string) => string | { path: string },
+  name: string,
+  relative: string = ""
+): PackageDir {
   const base = getParentDir(name);
-  const path = join(base, relative);
+  const path = join(typeof base === "string" ? base : base.path, relative);
   return {
     path,
     relative: getRelative(path),
@@ -30,5 +36,5 @@ export function getDir(getParentDir: (relative: string) => string, name: string,
 }
 
 export function getRootDir(relative: string = "") {
-  return getDir(() => getBase(), "", relative);
+  return getDir(getBase, "", relative);
 }

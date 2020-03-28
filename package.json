@@ -1,0 +1,16 @@
+{
+  "name": "@bconnorwhite/package",
+  "version": "1.0.0",
+  "description": "A utility for reading package.json of the root project, and forming paths relative to it.",
+  "main": "./build/index.js",
+  "author": "Connor White",
+  "license": "MIT",
+  "scripts": {
+    "build": "bob build"
+  },
+  "devDependencies": {
+    "@bconnorwhite/bob": "^1.0.2",
+    "@types/node": "^13.9.5",
+    "type-fest": "^0.12.0"
+  }
+}

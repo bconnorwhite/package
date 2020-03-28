@@ -1,8 +1,9 @@
 import getPackage, { PackageJSON, getMainDir } from "./package";
-import { getDir, getRootDir } from "./structure";
+import { getDir, getRootDir, PackageDir } from "./structure";
 
 export {
   PackageJSON,
+  PackageDir,
   getDir,
   getRootDir,
   getMainDir,

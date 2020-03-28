@@ -1,6 +1,6 @@
 {
   "name": "@bconnorwhite/package",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A utility for reading package.json of the root project, and forming paths relative to it.",
   "author": "Connor White",
   "license": "MIT",

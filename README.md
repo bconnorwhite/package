@@ -27,11 +27,14 @@ getDir(
 getRootDir(relative: string = "") => PackageDir
 // path to root of the project
 
-getPackage() => Promise<PackageJSON>
+getPackage() => PackageJSON
 // package.json object
 
-getMainDir() => Promise<PackageDir>
+getMainDir() => PackageDir
 // path to 'main' in package.json
+
+getVerison() => string
+// version in package.json
 ```
 ```js
 import { getPackage, getDir, getRootDir, getMainDir } from "@bconnorwhite/package";

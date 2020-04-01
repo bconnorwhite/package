@@ -1,4 +1,4 @@
-import getPackage, { PackageJSON, getMainDir } from "./package";
+import getPackage, { PackageJSON, getMainDir, getVersion } from "./package";
 import { getDir, getRootDir, PackageDir } from "./structure";
 
 export {
@@ -7,5 +7,6 @@ export {
   getDir,
   getRootDir,
   getMainDir,
-  getPackage
+  getPackage,
+  getVersion
 }

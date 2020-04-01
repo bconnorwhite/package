@@ -1,30 +1,27 @@
-import { readFile } from "fs";
+import { readFileSync } from "fs";
 import { join } from "path";
 import { getRootDir, getBase, getDir } from "./structure";
 import { PackageJSON } from "./types";
 
-export {
-  PackageJSON
+const root = getRootDir();
+const pkg: PackageJSON = JSON.parse(readFileSync(join(root.path, "package.json"), "utf8"));
+
+export function getMainDir() {
+  if(pkg.main) {
+    return getDir(getBase, "", pkg.main)
+  }
 }
 
-export async function getMainDir() {
-  return getPackage().then((pkg) => {
-    if(pkg.main) {
-      return getDir(getBase, "", pkg.main);
-    }
-  });
+export function getVersion() {
+  return pkg.version;
 }
 
-const getPackage = (): Promise<PackageJSON> => {
-  const root = getRootDir();
-  return new Promise((resolve) => {
-    readFile(join(root.path, "package.json"), (err, data) => {
-      if(err) {
-        console.error(err);
-      }
-      resolve(JSON.parse(data.toString()) as PackageJSON);
-    })
-  });
+function getPackage() {
+  return pkg;
 }
 
 export default getPackage;
+
+export {
+  PackageJSON
+}

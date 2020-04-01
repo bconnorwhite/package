@@ -32,7 +32,7 @@ export function getDir(
     path,
     relative: getRelative(path),
     name
-  }
+  };
 }
 
 export function getRootDir(relative: string = "") {

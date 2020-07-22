@@ -1,6 +1,6 @@
 {
   "name": "@bconnorwhite/package",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A utility for reading package.json of the root project, and forming paths relative to it.",
   "author": "Connor White",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
-    "@bconnorwhite/bob": "^1.2.2",
-    "@types/node": "^13.9.5"
+    "@bconnorwhite/bob": "^1.4.1",
+    "@types/node": "^14.0.24"
   }
 }

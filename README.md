@@ -11,6 +11,7 @@ yarn add @bconnorwhite/package
 ```
 
 ## API
+###### Types:
 ```ts
 type PackageDir = {
   path: string;
@@ -36,6 +37,7 @@ getMainDir() => PackageDir
 getVerison() => string
 // version in package.json
 ```
+###### Example usage:
 ```js
 import { getPackage, getDir, getRootDir, getMainDir } from "@bconnorwhite/package";
 ```

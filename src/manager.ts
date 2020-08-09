@@ -1,7 +1,7 @@
 import whichPM from "which-pm";
 import { exists, getBase } from ".";
 
-type PackageManagerName = "yarn" | "npm" | "pnpm";
+export type PackageManagerName = "yarn" | "npm" | "pnpm";
 
 const names: PackageManagerName[] = ["yarn", "npm", "pnpm"];
 

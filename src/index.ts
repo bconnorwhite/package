@@ -1,6 +1,6 @@
 import getPackage, { PackageJSON, getMainDir, getVersion, getScripts } from "./package";
 import { getDir, getRootDir, PackageDir, exists, getBase } from "./structure";
-import { getPackageManagerName } from "./manager";
+import { getPackageManagerName, PackageManagerName } from "./manager";
 
 export {
   PackageJSON,
@@ -13,5 +13,6 @@ export {
   getScripts,
   exists,
   getBase,
-  getPackageManagerName
+  getPackageManagerName,
+  PackageManagerName
 }

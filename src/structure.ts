@@ -1,4 +1,5 @@
 import { join, relative } from "path";
+import pathExists from "path-exists";
 
 export type PackageDir = {
   path: string;
@@ -37,4 +38,8 @@ export function getDir(
 
 export function getRootDir(relative: string = "") {
   return getDir(getBase, "", relative);
+}
+
+export function exists(relative: string = "") {
+  return pathExists(getRelative(relative));
 }

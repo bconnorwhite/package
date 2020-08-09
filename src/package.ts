@@ -16,6 +16,10 @@ export function getVersion() {
   return pkg.version;
 }
 
+export function getScripts() {
+  return Object.keys(pkg.scripts ?? {});
+}
+
 function getPackage() {
   return pkg;
 }

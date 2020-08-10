@@ -1,5 +1,11 @@
 import { join, relative } from "path";
 import pathExists from "path-exists";
+import {
+  getWorkspaceBase,
+  getWorkspaceRelative,
+  getWorkspaceRootDir,
+  existsWorkspace
+} from "./workspace";
 
 export type PackageDir = {
   path: string;
@@ -42,4 +48,11 @@ export function getRootDir(relative: string = "") {
 
 export function exists(relative: string = "") {
   return pathExists(getRelative(relative));
+}
+
+export {
+  getWorkspaceBase,
+  getWorkspaceRelative,
+  getWorkspaceRootDir,
+  existsWorkspace
 }

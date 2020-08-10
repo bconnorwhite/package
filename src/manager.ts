@@ -1,5 +1,6 @@
 import whichPM from "which-pm";
 import { exists, getBase } from ".";
+import { existsWorkspace } from "./structure";
 
 export type PackageManagerName = "yarn" | "npm" | "pnpm";
 
@@ -10,25 +11,22 @@ function isPMName(name: string): name is PackageManagerName {
 }
 
 export async function getPackageManagerName(): Promise<(PackageManagerName | undefined)> {
-  return exists("yarn.lock").then((yarn) => {
-    if(yarn) {
-      return "yarn";
+  const yarn = await exists("yarn.lock") ?? await existsWorkspace("yarn.lock");
+  if(yarn) {
+    return "yarn";
+  } else {
+    const npm = await exists("package-lock.json") ?? await existsWorkspace("package-lock.json");
+    if(npm) {
+      return "npm";
     } else {
-      return exists("package-lock.json").then((npm) => {
-        if(npm) {
-          return "npm";
-        } else {
-          return exists("shrinkwrap.yaml").then((pnpm) => {
-            if(pnpm) {
-              return "pnpm";
-            } else {
-              return whichPM(getBase()).then((pm) => {
-                return isPMName(pm.name) ? pm.name : undefined;
-              });
-            }
-          });
-        }
-      });
+      const pnpm = await exists("shrinkwrap.yaml") ?? await existsWorkspace("shrinkwrap.yaml");
+      if(pnpm) {
+        return "pnpm";
+      } else {
+        return whichPM(getBase()).then((pm) => {
+          return isPMName(pm.name) ? pm.name : undefined;
+        });
+      }
     }
-  });
+  }
 }

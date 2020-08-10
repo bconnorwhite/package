@@ -1,5 +1,14 @@
 import getPackage, { PackageJSON, getMainDir, getVersion, getScripts } from "./package";
-import { getDir, getRootDir, PackageDir, exists, getBase } from "./structure";
+import {
+  PackageDir,
+  getDir,
+  getBase,
+  getRootDir,
+  exists,
+  getWorkspaceBase,
+  getWorkspaceRootDir,
+  existsWorkspace
+} from "./structure";
 import { getPackageManagerName, PackageManagerName } from "./manager";
 
 export {
@@ -13,6 +22,9 @@ export {
   getScripts,
   exists,
   getBase,
+  getWorkspaceBase,
+  getWorkspaceRootDir,
+  existsWorkspace,
   getPackageManagerName,
   PackageManagerName
 }

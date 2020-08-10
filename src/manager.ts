@@ -11,15 +11,15 @@ function isPMName(name: string): name is PackageManagerName {
 }
 
 export async function getPackageManagerName(): Promise<(PackageManagerName | undefined)> {
-  const yarn = await exists("yarn.lock") ?? await existsWorkspace("yarn.lock");
+  const yarn = await exists("yarn.lock") || await existsWorkspace("yarn.lock");
   if(yarn) {
     return "yarn";
   } else {
-    const npm = await exists("package-lock.json") ?? await existsWorkspace("package-lock.json");
+    const npm = await exists("package-lock.json") || await existsWorkspace("package-lock.json");
     if(npm) {
       return "npm";
     } else {
-      const pnpm = await exists("shrinkwrap.yaml") ?? await existsWorkspace("shrinkwrap.yaml");
+      const pnpm = await exists("shrinkwrap.yaml") || await existsWorkspace("shrinkwrap.yaml");
       if(pnpm) {
         return "pnpm";
       } else {

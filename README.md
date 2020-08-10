@@ -36,6 +36,12 @@ getMainDir() => PackageDir
 
 getVerison() => string
 // version in package.json
+
+getScripts() => string[];
+// names of scripts in package.json
+
+getPackageManagerName() => Promise<"yarn" | "npm" | "pnpm" | undefined>
+// get name of package manager in use
 ```
 ###### Example usage:
 ```js

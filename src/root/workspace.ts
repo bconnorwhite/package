@@ -1,7 +1,7 @@
 import { join, relative } from "path";
 import pathExists from "path-exists";
 import findWorkspaceRoot from "find-workspace-root";
-import { getDir, getBase } from ".";
+import { getBase} from ".";
 
 export async function getWorkspaceBase() {
   return findWorkspaceRoot().then((result) => {
@@ -9,20 +9,20 @@ export async function getWorkspaceBase() {
   });
 }
 
-export async function getWorkspaceRelative(path: string) {
-  return getWorkspaceBase().then((workspaceBase) => {
-    if(workspaceBase) {
-      return relative(getBase(), join(workspaceBase, path));
+export async function getWorkspacePath(name: string) {
+  return getWorkspaceBase().then((base) => {
+    if(base) {
+      return join(base, name);
     } else {
       return undefined;
     }
   });
 }
 
-export async function getWorkspaceRootDir(relative: string = "") {
-  return getWorkspaceBase().then((workspaceBase) => {
-    if(workspaceBase) {
-      return getDir(() => workspaceBase, "", relative);
+export async function getWorkspaceRelative(path: string) {
+  return getWorkspaceBase().then((base) => {
+    if(base) {
+      return relative(base, path);
     } else {
       return undefined;
     }
@@ -36,5 +36,15 @@ export async function existsWorkspace(relative: string = "") {
     } else {
       return undefined;
     }
+  });
+}
+
+export async function isWorkspace() {
+  return getWorkspaceBase().then((result) => Boolean(result));
+}
+
+export async function isWorkspaceRoot() {
+  return getWorkspaceBase().then((result) => {
+    return result === getBase();
   });
 }

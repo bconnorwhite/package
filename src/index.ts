@@ -1,30 +1,49 @@
-import getPackage, { PackageJSON, getMainDir, getVersion, getScripts } from "./package";
 import {
-  PackageDir,
-  getDir,
   getBase,
-  getRootDir,
+  getPath,
+  getRelative,
   exists,
   getWorkspaceBase,
-  getWorkspaceRootDir,
-  existsWorkspace
-} from "./structure";
-import { getPackageManagerName, PackageManagerName } from "./manager";
+  getWorkspacePath,
+  getWorkspaceRelative,
+  existsWorkspace,
+  isWorkspace,
+  isWorkspaceRoot
+} from "./root";
+import { defineFrom, File, Directory } from "./definition";
+import pkg, { structure as packageStructure, PackageJSON, getPackageJSON } from "./package-json";
+
+export const structure = defineFrom(packageStructure, {
+  main: {
+    name: pkg.main
+  }
+});
+
+export const define = defineFrom(structure);
+
+export function getRootDir() {
+  return structure;
+}
+
+export function getMain() {
+  return structure.files().main as File<any>;
+}
 
 export {
-  PackageJSON,
-  PackageDir,
-  getDir,
-  getRootDir,
-  getMainDir,
-  getPackage,
-  getVersion,
-  getScripts,
-  exists,
   getBase,
+  getPath,
+  getRelative,
+  exists,
   getWorkspaceBase,
-  getWorkspaceRootDir,
+  getWorkspacePath,
+  getWorkspaceRelative,
   existsWorkspace,
-  getPackageManagerName,
-  PackageManagerName
-}
+  isWorkspace,
+  isWorkspaceRoot,
+  defineFrom,
+  File,
+  Directory,
+  pkg,
+  getPackageJSON,
+  PackageJSON
+};

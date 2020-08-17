@@ -11,39 +11,42 @@ yarn add @bconnorwhite/package
 ```
 
 ## API
-###### Types:
-```ts
-type PackageDir = {
-  path: string;
-  relative: string;
-  name: string;
-}
-
-getDir(
-  getParentDir: (relative: string) => string | { path: string },
-  name: string,
-  relative: string = ""
-) => PackageDir
-
-getRootDir(relative: string = "") => PackageDir
-// path to root of the project
-
-getPackage() => PackageJSON
-// package.json object
-
-getMainDir() => PackageDir
-// path to 'main' in package.json
-
-getVerison() => string
-// version in package.json
-
-getScripts() => string[];
-// names of scripts in package.json
-
-getPackageManagerName() => Promise<"yarn" | "npm" | "pnpm" | undefined>
-// get name of package manager in use
-```
 ###### Example usage:
 ```js
-import { getPackage, getDir, getRootDir, getMainDir } from "@bconnorwhite/package";
+import {
+  pkg,
+  getRootDir,
+  getMain,
+  getPackageJSON
+} from "@bconnorwhite/package";
+```
+###### Types:
+```ts
+type File<T> = {
+  name: string;
+  path: string;
+  relative: string;
+  read: () => Promise<T>;
+  readSync: () => T;
+};
+
+type Directory = {
+  name: string;
+  path: string;
+  relative: string;
+  files: ((...args: any) => File<any> | Directory);
+  read: () => Promise<string[]>;
+};
+
+getRootDir() => Directory;
+// path to root of the project
+
+getPackageJSON() => File<PackageJSON>;
+// package.json object
+
+getMain() => File<any>;
+// path to 'main' in package.json
+
+pkg: PackageJSON;
+// version in package.json
 ```

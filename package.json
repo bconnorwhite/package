@@ -1,14 +1,15 @@
 {
   "name": "@bconnorwhite/package",
   "version": "2.2.2",
-  "description": "A utility for reading package.json of the root project, and forming paths relative to it.",
+  "description": "A utility for reading package.json of a project, and forming paths relative to it.",
   "author": "Connor White",
   "license": "MIT",
   "keywords": [
     "package",
     "json",
     "relative",
-    "path"
+    "path",
+    "structure"
   ],
   "repository": {
     "type": "git",
@@ -22,7 +23,9 @@
   "dependencies": {
     "find-workspace-root": "^1.0.1",
     "path-exists": "^4.0.0",
-    "which-pm": "^2.0.0"
+    "read-file-safe": "^1.0.1",
+    "read-json-safe": "^1.0.1",
+    "recursive-readdir": "^2.2.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
@@ -31,6 +34,7 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-typescript": "^7.10.4",
     "@types/node": "^14.0.27",
+    "@types/recursive-readdir": "^2.2.0",
     "typescript": "^3.9.7"
   }
 }

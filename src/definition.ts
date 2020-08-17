@@ -1,6 +1,6 @@
 import recursive from "recursive-readdir";
 import { readFile, readFileSync } from "read-file-safe";
-import { readJSONFile } from "read-json-safe";
+import { readJSONFile, readJSONFileSync } from "read-json-safe";
 import { getBase, getPath, getRelative } from "./root";
 
 export type PathFields = {
@@ -39,8 +39,10 @@ type FileDefinition = {
   name?: string;
 }
 
+type FilesDefinition = Definitions | ((...args: any) => Definitions);
+
 type DirectoryDefinition = {
-  files: Definitions | ((...args: any) => Definitions);
+  files: FilesDefinition;
 } & FileDefinition;
 
 async function read(path: string)  {
@@ -51,6 +53,14 @@ async function read(path: string)  {
   }
 }
 
+function readSync(path: string)  {
+  if(path.endsWith(".json")) {
+    return readJSONFileSync(path);
+  } else {
+    return readFileSync(path);
+  }
+}
+
 function readDir(path: string) {
   return recursive(path);
 }
@@ -58,7 +68,7 @@ function readDir(path: string) {
 function getFileFields(path: string): FileFields<any> {
   return {
     read: () => read(path),
-    readSync: () => readFileSync(path)
+    readSync: () => readSync(path)
   }
 }
 
@@ -66,12 +76,12 @@ function getDirectoryFields(definition: DirectoryDefinition, path: string): Dire
   const files = definition.files;
   if(typeof files === "object") {
     return {
-      files: () => definePaths(files),
+      files: () => definePaths(files, path),
       read: () => readDir(path)
     };
   } else {
     return {
-      files: (...args: any) => definePaths(files(args)),
+      files: (...args: any) => definePaths(files(args), path),
       read: () => readDir(path)
     };
   }
@@ -97,10 +107,11 @@ function defineFile(file: FileDefinition, parent: string = getBase()): File<any>
 
 function defineDirectory(directory: DirectoryDefinition, parent: string = getBase()): Directory {
   const pathFields = getPathFields(directory, parent);
-  return {
+  const retval = {
     ...pathFields,
     ...getDirectoryFields(directory, pathFields.path)
   }
+  return retval;
 }
 
 function isDirectoryDefinition(definition: Definition): definition is DirectoryDefinition {
@@ -129,15 +140,28 @@ export const structure = defineDirectory({
   files: {}
 });
 
-export function defineFrom(structure: Directory): (files: Definitions) => Directory;
-export function defineFrom(structure: Directory, files: Definitions): Directory;
-export function defineFrom(structure: Directory, files?: Definitions): Directory | ((files: Definitions) => Directory) {
-  const resolve = (files: Definitions) => defineDirectory({
-    ...structure,
-    files: {
-      ...structure.files,
-      files
+function mergeFiles(oldFiles: (...args: any) => Paths, newFiles: FilesDefinition) {
+  return (...args: any) => {
+    if(typeof newFiles === "object") {
+      return {
+        ...oldFiles(args),
+        ...newFiles
+      }
+    } else {
+      return {
+        ...oldFiles(args),
+        ...newFiles(args)
+      }
     }
+  }
+}
+
+export function defineFrom(structure: Directory): (files: FilesDefinition) => Directory;
+export function defineFrom(structure: Directory, files: FilesDefinition): Directory;
+export function defineFrom(structure: Directory, files?: FilesDefinition): Directory | ((files: FilesDefinition) => Directory) {
+  const resolve = (files: FilesDefinition) => defineDirectory({
+    ...structure,
+    files: mergeFiles(structure.files, files)
   });
   if(files) {
     return resolve(files);

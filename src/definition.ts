@@ -124,12 +124,18 @@ function definePaths(definitions: Definitions, parent: string = getBase()): Path
     if(isDirectoryDefinition(definition)) {
       return {
         ...retval,
-        [key]: defineDirectory(definition, parent)
+        [key]: defineDirectory({
+          name: key,
+          ...definition
+        }, parent)
       }
     } else {
       return {
         ...retval,
-        [key]: defineFile(definition, parent)
+        [key]: defineFile({
+          name: key,
+          ...definition
+        }, parent)
       }
     }
   }, {});

@@ -4,6 +4,9 @@ import {
   getWorkspaceBase,
   getWorkspacePath,
   getWorkspaceRelative,
+  getWorkspacePackages,
+  WorkspacePackages,
+  WorkspacePackage,
   existsWorkspace,
   isWorkspace,
   isWorkspaceRoot
@@ -36,6 +39,9 @@ export {
   getWorkspaceBase,
   getWorkspacePath,
   getWorkspaceRelative,
+  getWorkspacePackages,
+  WorkspacePackages,
+  WorkspacePackage,
   existsWorkspace,
   isWorkspace,
   isWorkspaceRoot

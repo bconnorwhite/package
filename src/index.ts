@@ -8,7 +8,10 @@ import {
   getWorkspaceRelative,
   existsWorkspace,
   isWorkspace,
-  isWorkspaceRoot
+  isWorkspaceRoot,
+  getWorkspacePackages,
+  WorkspacePackages,
+  WorkspacePackage,
 } from "./root";
 import { defineFrom, File, Directory } from "./definition";
 import pkg, { structure as packageStructure, PackageJSON, getPackageJSON } from "./package-json";
@@ -37,6 +40,9 @@ export {
   getWorkspaceBase,
   getWorkspacePath,
   getWorkspaceRelative,
+  getWorkspacePackages,
+  WorkspacePackages,
+  WorkspacePackage,
   existsWorkspace,
   isWorkspace,
   isWorkspaceRoot,

@@ -13,12 +13,12 @@ import {
   WorkspacePackages,
   WorkspacePackage,
 } from "./root";
-import { defineFrom, File, Directory } from "./definition";
+import { defineFrom, File, JSONFile, JSONObject, Directory } from "./structure";
 import pkg, { structure as packageStructure, PackageJSON, getPackageJSON } from "./package-json";
 
 export const structure = defineFrom(packageStructure, {
   main: {
-    name: pkg.main
+    name: pkg?.main
   }
 });
 
@@ -29,7 +29,7 @@ export function getRootDir() {
 }
 
 export function getMain() {
-  return structure.files().main as File<any>;
+  return structure.files().main as File<string>;
 }
 
 export {
@@ -48,6 +48,8 @@ export {
   isWorkspaceRoot,
   defineFrom,
   File,
+  JSONFile,
+  JSONObject,
   Directory,
   pkg,
   getPackageJSON,

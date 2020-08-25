@@ -1,8 +1,8 @@
-import { join, relative } from "path";
+import { relative } from "path";
 import pathExists from "path-exists";
 import findWorkspaceRoot from "find-workspace-root";
 import exec, { flagsToArgs } from "@bconnorwhite/exec";
-import { getBase} from ".";
+import { getBase, getPath } from ".";
 
 export async function getWorkspaceBase() {
   return findWorkspaceRoot().then((result) => {
@@ -13,7 +13,7 @@ export async function getWorkspaceBase() {
 export async function getWorkspacePath(name: string) {
   return getWorkspaceBase().then((base) => {
     if(base) {
-      return join(base, name);
+      return getPath(base, name);
     } else {
       return undefined;
     }

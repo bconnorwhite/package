@@ -1,3 +1,5 @@
+import { JSONObject } from "read-json-safe";
+
 /**
 Matches any [primitive value](https://developer.mozilla.org/en-US/docs/Glossary/Primitive).
 */
@@ -330,7 +332,7 @@ export interface JSPMConfiguration {
 /**
 Type for [npm's `package.json` file](https://docs.npmjs.com/creating-a-package-json-file). Also includes types for fields used by other popular projects, like TypeScript and Yarn.
 */
-export type PackageJSON = {
+export type PackageJSON = JSONObject & {
 	/**
 	The name of the package.
 	*/

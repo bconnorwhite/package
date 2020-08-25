@@ -35,6 +35,16 @@ export function exists(relative: string = "") {
   return pathExists(getRelative(relative));
 }
 
+export async function existsContextual(relative: string = "") {
+  return isWorkspaceRoot().then((result) => {
+    if(result) {
+      return existsWorkspace(relative);
+    } else {
+      return exists(relative);
+    }
+  });
+}
+
 export {
   getWorkspaceBase,
   getWorkspacePath,

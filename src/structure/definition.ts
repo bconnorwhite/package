@@ -1,25 +1,45 @@
-import recursive from "recursive-readdir";
+import { promises, writeFileSync, mkdirSync } from "fs";
+import readDir from "recursive-readdir";
+import merge from "deepmerge";
 import { readFile, readFileSync } from "read-file-safe";
-import { readJSONFile, readJSONFileSync } from "read-json-safe";
-import { getBase, getPath, getRelative } from "./root";
+import { readJSONFile, readJSONFileSync, JSONObject } from "read-json-safe";
+import { getBase, getPath, getRelative, existsContextual } from "../root";
+
+export {
+  JSONObject
+}
+
+type FileType = "json";
 
 export type PathFields = {
   name: string;
   path: string;
   relative: string;
+  exists: () => Promise<boolean | undefined>;
+}
+
+export interface JSONFileFields<T extends JSONObject> extends FileFields<T> {
+  merge: (content: T) => Promise<void>;
+  mergeSync: (content: T) => void;
 }
 
 type FileFields<T> = {
-  read: () => Promise<T>;
-  readSync: () => T;
+  read: () => Promise<T | undefined>;
+  readSync: () => T | undefined;
+  write: (content: T) => Promise<void>;
+  writeSync: (content: T) => void;
 }
 
 type DirectoryFields = {
   files: ((...args: any) => Paths);
   read: () => Promise<string[]>;
+  write: () => Promise<void>;
+  writeSync: () => void;
 };
 
-export type File<T> = PathFields & FileFields<T>;
+export type JSONFile<T extends JSONObject> = File<T>;
+
+export type File<T> = PathFields & (T extends JSONObject ? JSONFileFields<T> : FileFields<string>);
 
 export type Directory = PathFields & DirectoryFields;
 
@@ -37,6 +57,7 @@ type Definition = FileDefinition | DirectoryDefinition;
 
 type FileDefinition = {
   name?: string;
+  type?: FileType;
 }
 
 type FilesDefinition = Definitions | ((...args: any) => Definitions);
@@ -45,55 +66,56 @@ type DirectoryDefinition = {
   files: FilesDefinition;
 } & FileDefinition;
 
-async function read(path: string)  {
-  if(path.endsWith(".json")) {
-    return readJSONFile(path);
-  } else {
-    return readFile(path);
-  }
-}
-
-function readSync(path: string)  {
-  if(path.endsWith(".json")) {
-    return readJSONFileSync(path);
-  } else {
-    return readFileSync(path);
-  }
-}
-
-function readDir(path: string) {
-  return recursive(path);
-}
-
-function getFileFields(path: string): FileFields<any> {
+function getJSONFileFields<T extends JSONObject>(path: string): JSONFileFields<T> {
   return {
-    read: () => read(path),
-    readSync: () => readSync(path)
+    read: () => readJSONFile(path) as Promise<T | undefined>,
+    readSync: () => readJSONFileSync(path) as (T | undefined),
+    write: (content: T) => promises.writeFile(path, JSON.stringify(content)),
+    writeSync: (content: T) => writeFileSync(path, JSON.stringify(content)),
+    merge: (content: Partial<T>) => readJSONFile(path).then((old) => {
+      return promises.writeFile(path, JSON.stringify(merge(old ?? {}, content)));
+    }),
+    mergeSync: (content: Partial<T>) => {
+      const old = readJSONFileSync(path);
+      return writeFileSync(path, JSON.stringify(merge(old ?? {}, content)));
+    }
+  }
+}
+
+type ConditionalFileFields<T, U extends JSONObject> = (T extends undefined ? FileFields<string> : JSONFileFields<U>);
+
+function getFileFields<T extends FileType | undefined, U extends JSONObject>(path: string, type: T): ConditionalFileFields<T, U> {
+  if(type === "json") {
+    return getJSONFileFields<U>(path) as ConditionalFileFields<T, U>;
+  } else {
+    return {
+      read: () => readFile(path),
+      readSync: () => readFileSync(path),
+      write: (content: string) => promises.writeFile(path, content),
+      writeSync: (content: string) => writeFileSync(path, content)
+    } as ConditionalFileFields<T, U>;
   }
 }
 
 function getDirectoryFields(definition: DirectoryDefinition, path: string): DirectoryFields {
-  const files = definition.files;
-  if(typeof files === "object") {
-    return {
-      files: () => definePaths(files, path),
-      read: () => readDir(path)
-    };
-  } else {
-    return {
-      files: (...args: any) => definePaths(files(args), path),
-      read: () => readDir(path)
-    };
-  }
+  const files = typeof definition.files === "object" ? () => definePaths(files, path) : (...args: any) => definePaths(files(args), path);
+  return {
+    files,
+    read: () => readDir(path),
+    write: () => promises.mkdir(path),
+    writeSync: () => mkdirSync(path)
+  };
 }
 
 function getPathFields(file: FileDefinition, parent: string): PathFields {
   const name = file.name ?? "";
   const path = getPath(parent, name);
+  const relative = getRelative(path);
   return {
     name,
     path,
-    relative: getRelative(path)
+    relative,
+    exists: () => existsContextual(relative)
   }
 }
 
@@ -101,17 +123,16 @@ function defineFile(file: FileDefinition, parent: string = getBase()): File<any>
   const pathFields = getPathFields(file, parent);
   return {
     ...pathFields,
-    ...getFileFields(pathFields.path)
+    ...getFileFields(pathFields.path, file.type)
   };
 }
 
-function defineDirectory(directory: DirectoryDefinition, parent: string = getBase()): Directory {
+export function defineDirectory(directory: DirectoryDefinition, parent: string = getBase()): Directory {
   const pathFields = getPathFields(directory, parent);
-  const retval = {
+  return {
     ...pathFields,
     ...getDirectoryFields(directory, pathFields.path)
   }
-  return retval;
 }
 
 function isDirectoryDefinition(definition: Definition): definition is DirectoryDefinition {
@@ -140,11 +161,6 @@ function definePaths(definitions: Definitions, parent: string = getBase()): Path
     }
   }, {});
 }
-
-export const structure = defineDirectory({
-  name: "",
-  files: {}
-});
 
 function mergeFiles(oldFiles: (...args: any) => Paths, newFiles: FilesDefinition) {
   return (...args: any) => {
@@ -175,5 +191,3 @@ export function defineFrom(structure: Directory, files?: FilesDefinition): Direc
     return resolve;
   }
 }
-
-export const define = defineFrom(structure);

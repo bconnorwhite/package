@@ -1,9 +1,10 @@
+import { define as defineRoot, defineFrom, File } from "../structure";
 import { PackageJSON } from "./types";
-import { define as defineRoot, defineFrom, File } from "../definition";
 
 export const structure = defineRoot({
   packageJSON: {
-    name: "package.json"
+    name: "package.json",
+    type: "json"
   }
 });
 

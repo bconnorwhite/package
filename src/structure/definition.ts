@@ -21,15 +21,15 @@ export type PathFields = {
 }
 
 export interface JSONFileFields<T extends JSONObject> extends FileFields<T> {
-  merge: (content: T) => Promise<void>;
-  mergeSync: (content: T) => void;
+  merge: (content?: T) => Promise<void>;
+  mergeSync: (content?: T) => void;
 }
 
 type FileFields<T> = {
   read: () => Promise<T | undefined>;
   readSync: () => T | undefined;
-  write: (content: T) => Promise<void>;
-  writeSync: (content: T) => void;
+  write: (content?: T) => Promise<void>;
+  writeSync: (content?: T) => void;
 }
 
 type DirectoryFields = {

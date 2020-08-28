@@ -1,8 +1,10 @@
-import { promises, writeFileSync, mkdirSync } from "fs";
+import { promises, mkdirSync } from "fs";
 import readDir from "recursive-readdir";
 import merge from "deepmerge";
 import { readFile, readFileSync } from "read-file-safe";
 import { readJSONFile, readJSONFileSync, JSONObject } from "read-json-safe";
+import { writeFile, writeFileSync } from "write-file-safe";
+import { writeJSON, writeJSONSync } from "write-json-safe";
 import { getBase, getPath, getRelative, existsContextual } from "../root";
 
 export {
@@ -70,14 +72,14 @@ function getJSONFileFields<T extends JSONObject>(path: string): JSONFileFields<T
   return {
     read: () => readJSONFile(path) as Promise<T | undefined>,
     readSync: () => readJSONFileSync(path) as (T | undefined),
-    write: (content: T) => promises.writeFile(path, JSON.stringify(content)),
-    writeSync: (content: T) => writeFileSync(path, JSON.stringify(content)),
-    merge: (content: Partial<T>) => readJSONFile(path).then((old) => {
-      return promises.writeFile(path, JSON.stringify(merge(old ?? {}, content)));
+    write: (content?: T) => writeJSON(path, content),
+    writeSync: (content?: T) => writeJSONSync(path, content),
+    merge: (content: Partial<T> = {}) => readJSONFile(path).then((old) => {
+      return writeJSON(path, merge(old ?? {}, content));
     }),
-    mergeSync: (content: Partial<T>) => {
+    mergeSync: (content: Partial<T> = {}) => {
       const old = readJSONFileSync(path);
-      return writeFileSync(path, JSON.stringify(merge(old ?? {}, content)));
+      return writeJSONSync(path, merge(old ?? {}, content));
     }
   }
 }
@@ -91,8 +93,8 @@ function getFileFields<T extends FileType | undefined, U extends JSONObject>(pat
     return {
       read: () => readFile(path),
       readSync: () => readFileSync(path),
-      write: (content: string) => promises.writeFile(path, content),
-      writeSync: (content: string) => writeFileSync(path, content)
+      write: (content?: string) => writeFile(path, content),
+      writeSync: (content?: string) => writeFileSync(path, content)
     } as ConditionalFileFields<T, U>;
   }
 }

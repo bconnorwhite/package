@@ -64,13 +64,13 @@ type File<T> = {
   exists: () => Promise<boolean | undefined>;
   read: () => Promise<T | undefined>;
   readSync: () => T | undefined;
-  write: (content: T) => Promise<void>;
-  writeSync: (content: T) => void;
+  write: (content?: T) => Promise<void>;
+  writeSync: (content?: T) => void;
 };
 
 type JSONFile<T extends JSONObject> = File<T> & {
-  merge: (content: T) => Promise<void>;
-  mergeSync: (content: T) => void;
+  merge: (content: T = {}) => Promise<void>;
+  mergeSync: (content: T = {}) => void;
 };
 
 type Directory = {

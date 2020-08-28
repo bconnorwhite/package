@@ -887,6 +887,11 @@
   dependencies:
     parse-json-object "^1.0.0"
 
+"@bconnorwhite/json-types@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@bconnorwhite/json-types/-/json-types-1.0.2.tgz#6ad5d379ef04ad4eb37442b97f7113b994d44675"
+  integrity sha512-XQG8O9wVYdIGvIAkePDy9vI95yRHywPXsUE/SsX+Lu8AXNB9WtAsW86he71MFsZed94UOL1h5j6GALO328C5SA==
+
 "@types/node@*", "@types/node@^14.0.27":
   version "14.0.27"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.27.tgz#a151873af5a5e851b51b3b065c9e63390a9e0eb1"
@@ -2101,6 +2106,13 @@ string_decoder@~1.1.1:
   dependencies:
     safe-buffer "~5.1.0"
 
+stringify-json-object@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/stringify-json-object/-/stringify-json-object-1.0.1.tgz#25e19b8831ddff989cd21c1be9172bf7dd62204e"
+  integrity sha512-ZE9/b+/8gnhZfVUAKn2CTyhyCA0VMRSdVFDRIlKalSkShg5GiMUcDNIVBhlbwRwZuRRec7p6NHv++1itwg0lxQ==
+  dependencies:
+    "@bconnorwhite/json-types" "^1.0.2"
+
 supports-color@^5.3.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-5.5.0.tgz#e2e69a44ac8772f78a1ec0b35b689df6530efc8f"
@@ -2220,3 +2232,16 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
+
+write-file-safe@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/write-file-safe/-/write-file-safe-1.0.2.tgz#2c83c34f1c565725c67535771ff3d3237d12e15e"
+  integrity sha512-KEaCVpDKWXchvy11YTS1hR1TAOCDLYfbWl4Z1hnu2Z6ztjkk2Qi2mADlnG3TW1H1Wr5CZVulCVLCdh46ca8yXQ==
+
+write-json-safe@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/write-json-safe/-/write-json-safe-1.0.0.tgz#f5cb003b59fe3ef31f86b8eea39a68f06dbe096d"
+  integrity sha512-EnHGSKh7JgsVYT8+7JsOiAJxqx+s2xexcMQ6q//oBjdI4uZUzRV5tN2HjxMQauYHpUvUAyRb4EU5mB/bzZ9AIg==
+  dependencies:
+    stringify-json-object "^1.0.1"
+    write-file-safe "^1.0.2"

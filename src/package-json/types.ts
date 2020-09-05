@@ -219,11 +219,11 @@ export type Scripts = {
 /**
 Dependencies of the package. The version range is a string which has one or more space-separated descriptors. Dependencies can also be identified with a tarball or Git URL.
 */
-export interface Dependency {
+export type Dependency = {
   [packageName: string]: string;
 }
 
-export interface NonStandardEntryPoints {
+export type NonStandardEntryPoints = {
   /**
   An ECMAScript module ID that is the primary entry point to the program.
   */
@@ -252,7 +252,7 @@ export interface NonStandardEntryPoints {
   sideEffects?: boolean | string[];
 }
 
-export interface TypeScriptConfiguration {
+export type TypeScriptConfiguration = {
   /**
   Location of the bundled TypeScript declaration file.
   */
@@ -267,7 +267,7 @@ export interface TypeScriptConfiguration {
 /**
 An alternative configuration for Yarn workspaces.
 */
-export interface WorkspaceConfig {
+export type WorkspaceConfig = {
   /**
   An array of workspace pattern strings which contain the workspace packages.
   */
@@ -289,7 +289,7 @@ The patterns are handled with [minimatch](https://github.com/isaacs/minimatch).
 */
 type WorkspacePattern = string;
 
-export interface YarnConfiguration {
+export type YarnConfiguration = {
   /**
   Used to configure [Yarn workspaces](https://classic.yarnpkg.com/docs/workspaces/).
   Workspaces allow you to manage multiple packages within the same repository in such a way that you only need to run `yarn install` once to install all of them in a single pass.
@@ -309,7 +309,7 @@ export interface YarnConfiguration {
   resolutions?: Dependency;
 }
 
-export interface JSPMConfiguration {
+export type JSPMConfiguration = {
   /**
   JSPM configuration.
   */

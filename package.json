@@ -11,20 +11,22 @@
     "path",
     "structure"
   ],
-  "repository": {
+  "main": "build/index.js",
     "type": "git",
     "url": "git+https://github.com/bconnorwhite/package.git"
   },
   "main": "./build/index.js",
   "scripts": {
     "build": "bob build",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build && yarn test",
     "postversion": "git push",
+    "test": "jest"
   },
   "dependencies": {
     "@bconnorwhite/exec": "^5.1.0",
     "deepmerge": "^4.2.2",
     "find-workspace-root": "^1.0.1",
+    "jest": "^26.4.2",
     "path-exists": "^4.0.0",
     "read-file-safe": "^1.0.1",
     "read-json-safe": "^1.0.1",

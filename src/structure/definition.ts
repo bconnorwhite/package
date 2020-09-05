@@ -99,8 +99,14 @@ function getFileFields<T extends FileType | undefined, U extends JSONObject>(pat
   }
 }
 
+function isDefinitions(files: FilesDefinition): files is Definitions {
+  return typeof (files as Definitions) === "object";
+}
+
 function getDirectoryFields(definition: DirectoryDefinition, path: string): DirectoryFields {
-  const files = typeof definition.files === "object" ? () => definePaths(files, path) : (...args: any) => definePaths(files(args), path);
+  const files: ((...args: any) => Paths) = isDefinitions(definition.files)
+    ? () => definePaths(definition.files as Definitions, path)
+    : (...args: any) => definePaths(files(args), path);
   return {
     files,
     read: () => readDir(path),

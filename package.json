@@ -19,6 +19,7 @@
   "scripts": {
     "build": "bob build",
     "prepublishOnly": "yarn build"
+    "postversion": "git push",
   },
   "dependencies": {
     "@bconnorwhite/exec": "^5.1.0",

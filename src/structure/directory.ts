@@ -31,17 +31,17 @@ export function defineDirectory(directory: DirectoryDefinition, parent: string =
   }
 }
 
-function getFilesFunction(files: FilesDefinition) {
+function getFilesFunction(files: FilesDefinition, parent: string) {
   if(isFunction(files)) {
-    return (...args: any) => definePaths(files(args));
+    return (...args: any) => definePaths(files(args), parent);
   } else {
-    return () => definePaths(files);
+    return () => definePaths(files, parent);
   }
 }
 
 function getDirectoryFields(definition: DirectoryDefinition, path: string): DirectoryFields {
   return {
-    files: getFilesFunction(definition.files),
+    files: getFilesFunction(definition.files, path),
     read: () => readDir(path),
     write: () => promises.mkdir(path),
     writeSync: () => mkdirSync(path)

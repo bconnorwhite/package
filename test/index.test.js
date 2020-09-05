@@ -1,4 +1,4 @@
-const { structure, getRootDir, getMain } = require("../build/index.js");
+const { structure, define, getRootDir, getMain } = require("../build/index.js");
 
 test("getRootDir", () => {
   const root = getRootDir();
@@ -16,4 +16,17 @@ test("structure name", () => {
 
 test("structure relative", () => {
   expect(structure.files().main.relative).toBe("build/index.js");
+});
+
+test("define", () => {
+  expect(define({
+    source: {
+      name: "src",
+      files: {
+        index: {
+          name: "index.ts"
+        }
+      }
+    }
+  }).files().source.files().index.relative).toBe("src/index.ts");
 });

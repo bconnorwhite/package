@@ -40,7 +40,7 @@ export type BugsLocation = string | {
 	email?: string;
 };
 
-export interface DirectoryLocations {
+export type DirectoryLocations = {
   /**
   Location for executable scripts. Sugar to generate entries in the `bin` property by walking the folder.
   */
@@ -424,9 +424,7 @@ export type PackageJSON = JSONObject & {
 	/**
 	Is used to set configuration parameters used in package scripts that persist across upgrades.
 	*/
-	config?: {
-		[configKey: string]: unknown;
-	};
+	config?: JSONObject;
 
 	/**
 	The dependencies of the package.
@@ -543,9 +541,7 @@ export type PackageJSON = JSONObject & {
 	/**
 	A set of config values that will be used at publish-time. It's especially handy to set the tag, registry or access, to ensure that a given package is not tagged with 'latest', published to the global public registry or that a scoped module is private by default.
 	*/
-	publishConfig?: {
-		[config: string]: unknown;
-	};
+	publishConfig?: JSONObject;
 
 	/**
 	Describes and notifies consumers of a package's monetary support information.
@@ -573,6 +569,4 @@ export type PackageJSON = JSONObject & {
 NonStandardEntryPoints &
 TypeScriptConfiguration &
 YarnConfiguration &
-JSPMConfiguration & {
-	[key: string]: unknown;
-};
+JSPMConfiguration & JSONObject;

@@ -1,5 +1,6 @@
 import merge from "deepmerge";
-import { readJSONFile, readJSONFileSync, JSONObject } from "read-json-safe";
+import { JSONObject } from "@bconnorwhite/json-types";
+import { readJSONFile, readJSONFileSync } from "read-json-safe";
 import { writeJSON, writeJSONSync } from "write-json-safe";
 import { FileFields, File } from "./";
 

@@ -1,4 +1,4 @@
-import { JSONObject } from "read-json-safe";
+import { JSONObject } from "@bconnorwhite/json-types";
 
 /**
 Matches any [primitive value](https://developer.mozilla.org/en-US/docs/Glossary/Primitive).
@@ -17,39 +17,30 @@ Allows creating a union type by combining primitive types and literal types with
 Currently, when a union type of a primitive type is combined with literal types, TypeScript loses all information about the combined literals. Thus, when such type is used in an IDE with autocompletion, no suggestions are made for the declared literals.
 This type is a workaround for [Microsoft/TypeScript#29729](https://github.com/Microsoft/TypeScript/issues/29729). It will be removed as soon as it's not needed anymore.
  */
-export type LiteralUnion<
-	LiteralType extends BaseType,
-	BaseType extends Primitive
-> = LiteralType | (BaseType & {_?: never});
+export type LiteralUnion<LiteralType extends BaseType, BaseType extends Primitive> = LiteralType | (BaseType & {_?: never});
 
 /**
 A person who has been involved in creating or maintaining the package.
 */
-export type Person =
-  | string
-  | {
-    name: string;
-    url?: string;
-    email?: string;
-  };
+export type Person = string | {
+	name: string;
+	url?: string;
+	email?: string;
+};
 
-export type BugsLocation =
-  | string
-  | {
-    /**
-    The URL to the package's issue tracker.
-    */
-    url?: string;
+export type BugsLocation = string | {
+	/**
+	The URL to the package's issue tracker.
+	*/
+	url?: string;
 
-    /**
-    The email address to which issues should be reported.
-    */
-    email?: string;
-  };
+	/**
+	The email address to which issues should be reported.
+	*/
+	email?: string;
+};
 
 export interface DirectoryLocations {
-  [directoryType: string]: unknown;
-
   /**
   Location for executable scripts. Sugar to generate entries in the `bin` property by walking the folder.
   */
@@ -241,9 +232,7 @@ export interface NonStandardEntryPoints {
   /**
   A module ID with untranspiled code that is the primary entry point to the program.
   */
-  esnext?:
-  | string
-  | {
+  esnext?: string | {
     [moduleName: string]: string | undefined;
     main?: string;
     browser?: string;
@@ -252,9 +241,7 @@ export interface NonStandardEntryPoints {
   /**
   A hint to JavaScript bundlers or component tools when packaging modules for client side use.
   */
-  browser?:
-  | string
-  | {
+  browser?: string | {
     [moduleName: string]: string | false;
   };
 
@@ -401,9 +388,7 @@ export type PackageJSON = JSONObject & {
 	/**
 	The executable files that should be installed into the `PATH`.
 	*/
-	bin?:
-	| string
-	| {
+	bin?: string | {
 		[binary: string]: string;
 	};
 
@@ -420,9 +405,7 @@ export type PackageJSON = JSONObject & {
 	/**
 	Location for the code repository.
 	*/
-	repository?:
-	| string
-	| {
+	repository?: string | {
 		type: string;
 		url: string;
 

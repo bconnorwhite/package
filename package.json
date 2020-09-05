@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@bconnorwhite/exec": "^5.1.0",
+    "@bconnorwhite/json-types": "^1.0.5",
     "deepmerge": "^4.2.2",
     "find-workspace-root": "^1.0.1",
     "jest": "^26.4.2",

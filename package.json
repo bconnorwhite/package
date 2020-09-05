@@ -4,18 +4,21 @@
   "description": "A utility for reading package.json of a project, and forming paths relative to it.",
   "author": "Connor White",
   "license": "MIT",
+  "homepage": "https://connorwhite.org/github/package",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bconnorwhite/package.git"
+  },
   "keywords": [
     "package",
     "json",
     "relative",
     "path",
-    "structure"
+    "structure",
+    "definition",
+    "define"
   ],
   "main": "build/index.js",
-    "type": "git",
-    "url": "git+https://github.com/bconnorwhite/package.git"
-  },
-  "main": "./build/index.js",
   "scripts": {
     "build": "bob build",
     "prepublishOnly": "yarn build && yarn test",

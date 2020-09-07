@@ -1,7 +1,8 @@
 import { readFile, readFileSync } from "read-file-safe";
 import { writeFile, writeFileSync } from "write-file-safe";
 import { getBase } from "../../root";
-import { getJSONFileFields, JSONFile, JSONFileType, JSONObject, JSONFileFields } from "./json";
+import { jsonFileType, getJSONFileFields, JSONFile, JSONFileType, JSONObject, JSONFileFields } from "./json";
+import { markdownFileType, getMarkdownFileFields, MarkdownFileType, MarkdownFile, MarkdownTokens } from "./markdown";
 import { getPathFields, PathFields } from "../path";
 
 export type FileDefinition = {
@@ -9,7 +10,7 @@ export type FileDefinition = {
   type?: FileType;
 }
 
-type FileType = JSONFileType;
+type FileType = JSONFileType | MarkdownFileType;
 
 export type File<T> = PathFields & (T extends JSONObject ? JSONFileFields<T> : FileFields<string>);
 
@@ -31,8 +32,10 @@ export function defineFile(file: FileDefinition, parent: string = getBase()): Fi
 }
 
 function getFileFields<T extends FileType | undefined, U extends JSONObject>(path: string, type: T): ConditionalFileFields<T, U> {
-  if(type === "json") {
+  if(type === jsonFileType) {
     return getJSONFileFields<U>(path) as ConditionalFileFields<T, U>;
+  } else if(type === markdownFileType) {
+    return getMarkdownFileFields<U>(path) as ConditionalFileFields<T, U>;
   } else {
     return {
       read: () => readFile(path),
@@ -45,5 +48,7 @@ function getFileFields<T extends FileType | undefined, U extends JSONObject>(pat
 
 export {
   JSONFile,
-  JSONObject
+  JSONObject,
+  MarkdownFile,
+  MarkdownTokens
 }

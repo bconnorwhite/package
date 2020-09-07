@@ -13,7 +13,7 @@ import {
   WorkspacePackages,
   WorkspacePackage,
 } from "./root";
-import { defineFrom, File, JSONFile, JSONObject, Directory } from "./structure";
+import { defineFrom, File, JSONFile, JSONObject, MarkdownFile, MarkdownTokens, Directory } from "./structure";
 import pkg, { structure as packageStructure, PackageJSON, getPackageJSON } from "./package-json";
 
 export const structure = defineFrom(packageStructure, {
@@ -50,6 +50,8 @@ export {
   File,
   JSONFile,
   JSONObject,
+  MarkdownFile,
+  MarkdownTokens,
   Directory,
   pkg,
   getPackageJSON,

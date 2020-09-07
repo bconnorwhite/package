@@ -1,6 +1,6 @@
 import { Paths, PathDefinitions, PathFields } from "./path";
 import { defineDirectory, Directory, isFunction, FilesDefinition, } from "./directory";
-import { File, JSONFile, JSONObject } from "./file";
+import { File, JSONFile, JSONObject, MarkdownFile, MarkdownTokens } from "./file";
 
 function mergeFiles(oldFiles: (...args: any) => Paths, newFiles: FilesDefinition): (...args: any) => PathDefinitions {
   return (...args: any) => {
@@ -45,5 +45,7 @@ export {
   File,
   JSONFile,
   JSONObject,
+  MarkdownFile,
+  MarkdownTokens,
   PathFields
 }

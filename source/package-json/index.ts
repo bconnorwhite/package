@@ -1,5 +1,5 @@
+import { PackageJSON } from "types-pkg-json";
 import { define as defineRoot, defineFrom, File, Directory } from "../structure";
-import { PackageJSON } from "./types";
 
 export const structure = defineRoot({
   packageJSON: {

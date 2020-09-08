@@ -39,6 +39,7 @@
     "read-json-safe": "^1.0.1",
     "read-md-safe": "^1.0.1",
     "recursive-readdir": "^2.2.2",
+    "types-pkg-json": "^1.0.2",
     "write-file-safe": "^1.0.2",
     "write-json-safe": "^1.0.0",
     "write-md-safe": "^1.0.3"

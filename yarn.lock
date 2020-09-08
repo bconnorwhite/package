@@ -5267,6 +5267,18 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
+types-json@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/types-json/-/types-json-1.0.7.tgz#d7e929c3dc88c6362c445526338ad1c3e641cb39"
+  integrity sha512-BzDzAIjrSrViEYQtCCjOemr5yggoUQE0oJGiVkMUE3yy5FNSZmWZqlB2DDLSm3VeE0hsj8snXVIHJmWKX0PtUQ==
+
+types-pkg-json@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/types-pkg-json/-/types-pkg-json-1.0.2.tgz#a2b7caa6b306a7a5eae2cacac72f60d9f922ad3e"
+  integrity sha512-5yJb8ztBwJY55+USxU50IUlm+G6PykqOgHbnJiGWHB4TwStUBbJDDy9JgfmFDFDKMnNX4a1uuqoip5x/ObWkNA==
+  dependencies:
+    types-json "^1.0.7"
+
 typescript@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.2.tgz#7ea7c88777c723c681e33bf7988be5d008d05ac2"

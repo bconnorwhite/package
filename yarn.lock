@@ -1431,6 +1431,11 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
+"@types/marked@^1.1.0":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@types/marked/-/marked-1.2.2.tgz#1f858a0e690247ecf3b2eef576f98f86e8d960d4"
+  integrity sha512-wLfw1hnuuDYrFz97IzJja0pdVsC0oedtS4QsKH1/inyW9qkLQbXgMUqEQT0MVtUBx3twjWeInUfjQbhBVLECXw==
+
 "@types/node@*", "@types/node@^14.0.27":
   version "14.0.27"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.27.tgz#a151873af5a5e851b51b3b065c9e63390a9e0eb1"
@@ -1915,6 +1920,11 @@ char-regex@^1.0.2:
   resolved "https://registry.yarnpkg.com/char-regex/-/char-regex-1.0.2.tgz#d744358226217f981ed58f479b1d6bcc29545dcf"
   integrity sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==
 
+char-to-string@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/char-to-string/-/char-to-string-1.0.0.tgz#3e1d11c33a004930e8552966c066741ac67e2f1e"
+  integrity sha512-9WeQ+l5COfnFkuDmTJ5zXzMhb4xpMPDu24pD50cMvWT+Br9Sni1hlpvdPK/YpZl1+QI15f4pMWfyEzyyIHJr2Q==
+
 chardet@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
@@ -2355,6 +2365,13 @@ end-of-stream@^1.1.0:
   integrity sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==
   dependencies:
     once "^1.4.0"
+
+ends-with-string@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ends-with-string/-/ends-with-string-1.0.1.tgz#ce76999307ebef92d039e2cb895c22f0677540ec"
+  integrity sha512-TQg80EKJsnNfH9H/5HpAXKJP7YMYFkoUeS9ayMY60zwNoiNecv8D0+a9cycqdM8rhj/hfBqJb+9uLMsYP8d/Bw==
+  dependencies:
+    char-to-string "^1.0.0"
 
 error-ex@^1.3.1:
   version "1.3.2"
@@ -3884,6 +3901,11 @@ marked@^1.1.1:
   resolved "https://registry.yarnpkg.com/marked/-/marked-1.1.1.tgz#e5d61b69842210d5df57b05856e0c91572703e6a"
   integrity sha512-mJzT8D2yPxoPh7h0UXkB+dBj4FykPJ2OIfxAWeIHrvoHDkFxukV/29QxoFQoPM6RLEwhIFdJpmKBlqVM3s2ZIw==
 
+marked@^1.2.0:
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-1.2.9.tgz#53786f8b05d4c01a2a5a76b7d1ec9943d29d72dc"
+  integrity sha512-H8lIX2SvyitGX+TRdtS06m1jHMijKN/XjfH6Ooii9fvxMlh8QdqBfBDkGUpMWH2kQNrtixjzYUa3SH8ROTgRRw==
+
 merge-stream@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-2.0.0.tgz#52823629a14dd00c9770fb6ad47dc6310f2c1f60"
@@ -4427,6 +4449,11 @@ read-file-safe@^1.0.1:
   resolved "https://registry.yarnpkg.com/read-file-safe/-/read-file-safe-1.0.1.tgz#8ef837ea7b238d279399df9adf63de8d1468fee9"
   integrity sha512-EjDV+Xc+A4jUyvHRQKh8qxDUqpnBsvM7ZmLMVuc07+lH6qI+u1imRCm+z7fCczt1/kuib8i87FlCA7z0ftYM1A==
 
+read-file-safe@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/read-file-safe/-/read-file-safe-1.0.10.tgz#9ac9118f12cb122614612211f90dad9daf732e39"
+  integrity sha512-qW25fd2uMX3dV6Ui/R0jYK1MhTpjx8FO/VHaHTXzwWsGnkNwLRcqYfCXd9qDM+NZ273DPUvP2RaimYuLSu1K/g==
+
 read-json-safe@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/read-json-safe/-/read-json-safe-1.0.1.tgz#ec248be5ea9e50c7900a568834d2263c4e1ec3af"
@@ -4435,12 +4462,14 @@ read-json-safe@^1.0.1:
     parse-json-object "^1.0.0"
     read-file-safe "^1.0.1"
 
-read-md-safe@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/read-md-safe/-/read-md-safe-1.0.1.tgz#3b046ec7baad444dcde871390d40bf090d13e1a2"
-  integrity sha512-uNOkeHuFSqG8WT9mMrT1DLTtmeOgGa1AeHOHLNu7yP6EDbqxyX9l0ZvBUiLb3N5mH9xqO4Io5QjNr6u3brWvRA==
+read-md-safe@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/read-md-safe/-/read-md-safe-1.0.3.tgz#7d01a0688f9cda7ed484e768b86952945365df14"
+  integrity sha512-lJszw35sXlSXnERbcqzmUKwsH1m/WJ1+L8x2XZxiGDTedcIWb9ntpLTkpW8jPiPm7oVhtGqgHQ74MAPUUI58Yw==
   dependencies:
+    "@types/marked" "^1.1.0"
     marked "^1.1.1"
+    read-file-safe "^1.0.10"
 
 read-pkg-up@^7.0.1:
   version "7.0.1"
@@ -5116,6 +5145,14 @@ terminating-newline@^1.2.2:
   dependencies:
     detect-newline "^3.1.0"
 
+terminating-newline@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/terminating-newline/-/terminating-newline-1.2.4.tgz#9dc00874648ba6c7300b6c50801fb6eca613ead1"
+  integrity sha512-zJ7ECSI+Ackgbck4h0n8tUg5Q/3vRpVV3T7ITb9w1NY6ezrA0oY0LTDEu1m3hstev7Ok4ZssS+UkL/PIXMz9vQ==
+  dependencies:
+    detect-newline "^3.1.0"
+    ends-with-string "^1.0.0"
+
 test-exclude@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/test-exclude/-/test-exclude-6.0.0.tgz#04a8698661d805ea6fa293b6cb9e63ac044ef15e"
@@ -5564,6 +5601,11 @@ wrappy@1:
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
 
+write-dir-safe@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/write-dir-safe/-/write-dir-safe-1.0.1.tgz#db5695a76f33f7a1b28ed48d370bab099d34980a"
+  integrity sha512-wnY2yzWbfawmHs6sbAOsqLf+yEPS3I+9/kRrL9zAESb56KQa7gVG8ofxtZcdIAqsb47lHPXqEMOhzXoFJkE9Pw==
+
 write-file-atomic@^3.0.0:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/write-file-atomic/-/write-file-atomic-3.0.3.tgz#56bd5c5a5c70481cd19c571bd39ab965a5de56e8"
@@ -5579,10 +5621,13 @@ write-file-safe@^1.0.2:
   resolved "https://registry.yarnpkg.com/write-file-safe/-/write-file-safe-1.0.2.tgz#2c83c34f1c565725c67535771ff3d3237d12e15e"
   integrity sha512-KEaCVpDKWXchvy11YTS1hR1TAOCDLYfbWl4Z1hnu2Z6ztjkk2Qi2mADlnG3TW1H1Wr5CZVulCVLCdh46ca8yXQ==
 
-write-file-safe@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/write-file-safe/-/write-file-safe-1.0.3.tgz#6e259879617da395a641296d459e13d3ea36575f"
-  integrity sha512-bdAWuzoYTLhVmAvKU7MIy2tWUs6afawPrOaktl6YBGk28LRh5RphDLDAqoXXe2j9ZvLeh+fAblnhQ6wZ0hd+iQ==
+write-file-safe@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/write-file-safe/-/write-file-safe-1.2.2.tgz#f90659f09c59617a2be742ef21a6841f2ba4934f"
+  integrity sha512-UcpxUj37t7Di3SQIy7cvGgf0Dn2YmmpBaUekuVmB3UNzyFUfwZI4sfFo3TolK8Wx9DxmnaUXPaeBF7Y/CQzfmA==
+  dependencies:
+    terminating-newline "^1.2.4"
+    write-dir-safe "^1.0.0"
 
 write-json-safe@^1.0.0:
   version "1.0.0"
@@ -5592,13 +5637,14 @@ write-json-safe@^1.0.0:
     stringify-json-object "^1.0.1"
     write-file-safe "^1.0.2"
 
-write-md-safe@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/write-md-safe/-/write-md-safe-1.0.3.tgz#553cec88508319c4a61008c8a526e0d24af750e0"
-  integrity sha512-xGlzacHcSF3v5M4reYPnqvACJSBGia2ami/ZquhhZAWfbxPIEvj5NYkVmuJ4KBKpPtLZSfqPzcnRkmTVeZkllg==
+write-md-safe@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/write-md-safe/-/write-md-safe-1.1.0.tgz#944e4c270ee4782b76e70ebacf78e3356ef63504"
+  integrity sha512-cwFfhlG/COiL2hMoIWj8swVPlTvhEzP0DV8b30qJyCY1FAJ0G4PUApNZYQzDzCBb2DWUOIG3XfY4+N4jTvhx4w==
   dependencies:
-    marked "^1.1.1"
-    write-file-safe "^1.0.3"
+    "@types/marked" "^1.1.0"
+    marked "^1.2.0"
+    write-file-safe "^1.2.2"
 
 ws@^7.2.3:
   version "7.3.1"

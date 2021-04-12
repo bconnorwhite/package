@@ -1,4 +1,4 @@
-import { promises, mkdirSync } from "fs";
+import { writeDir, writeDirSync } from "write-dir-safe";
 import readDir from "recursive-readdir";
 import { getBase } from "../root";
 import { definePaths, getPathFields, Paths, PathFields, PathDefinitions } from "./path";
@@ -15,8 +15,8 @@ export type Directory = PathFields & DirectoryFields;
 export type DirectoryFields = {
   files: ((...args: any) => Paths);
   read: () => Promise<string[]>;
-  write: () => Promise<void>;
-  writeSync: () => void;
+  write: () => Promise<boolean>;
+  writeSync: () => boolean;
 };
 
 export function isFunction(files: FilesDefinition): files is ((...args: any) => PathDefinitions) {
@@ -43,7 +43,7 @@ function getDirectoryFields(definition: DirectoryDefinition, path: string): Dire
   return {
     files: getFilesFunction(definition.files, path),
     read: () => readDir(path),
-    write: () => promises.mkdir(path),
-    writeSync: () => mkdirSync(path)
+    write: () => writeDir(path),
+    writeSync: () => writeDirSync(path)
   };
 }

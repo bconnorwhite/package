@@ -80,8 +80,8 @@ type Directory = {
   files: ((...args: any) => Paths);
   exists: () => Promise<boolean | undefined>;
   read: () => Promise<string[]>;
-  write: () => Promise<void>;
-  writeSync: () => void;
+  write: () => Promise<boolean>;
+  writeSync: () => boolean;
 };
 ```
 ### Default Structure Functions
